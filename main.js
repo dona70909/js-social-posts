@@ -103,14 +103,6 @@ const btnLikes = document.querySelectorAll(".like-button");
 console.log(btnLikes);
 
 const likeCounterOutput = document.querySelectorAll("#like-counter-1");
-/* btnLikes.forEach((btn,index) => {
-    
-    btn.addEventListener("click", function(){
-        likeCounterOutput[index].innerHTML = `${posts[index].likes++}`;
-    });
-    
-}); */
-
 
 btnLikes.forEach((btn,index) => {
     let clickCount = 0;
