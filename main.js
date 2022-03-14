@@ -64,35 +64,35 @@ for(let i = 0; i<posts.length;i++){
     containerPosts.innerHTML +=` 
     
     <div class="post">
-        <div class="post__header">
-            <div class="post-meta">                    
-                <div class="post-meta__icon">
-                    <img class="profile-pic" src=${posts[i].media} alt="${posts[i].author.name}">                    
-                </div>
-                <div class="post-meta__data">
-                    <div class="post-meta__author">${posts[i].author.name}</div>
-                    <div class="post-meta__time">${posts[i].created}</div>
-                </div>                    
-            </div>
-        </div>
-        <div class="post__text">${posts[i].content}</div>
-        <div class="post__image">
-            <img src=${posts[i].author.image} alt="">
-        </div>
+    <div class="post__header">
+    <div class="post-meta">                    
+    <div class="post-meta__icon">
+    <img class="profile-pic" src=${posts[i].media} alt="${posts[i].author.name}">                    
+    </div>
+    <div class="post-meta__data">
+    <div class="post-meta__author">${posts[i].author.name}</div>
+    <div class="post-meta__time">${posts[i].created}</div>
+    </div>                    
+    </div>
+    </div>
+    <div class="post__text">${posts[i].content}</div>
+    <div class="post__image">
+    <img src=${posts[i].author.image} alt="">
+    </div>
     
-        <div class="post__footer">
-            <div class="likes js-likes">
-                <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#/" data-postid="1">
-                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                        <span class="like-button__label">Mi Piace</span>
-                    </a>
-                </div>
-                <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
-                </div>
-            </div> 
-        </div>            
+    <div class="post__footer">
+    <div class="likes js-likes">
+    <div class="likes__cta">
+    <a class="like-button  js-like-button" href="#/" data-postid="1">
+    <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+    <span class="like-button__label">Mi Piace</span>
+    </a>
+    </div>
+    <div class="likes__counter">
+    Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
+    </div>
+    </div> 
+    </div>            
     </div>
     `;
 };
@@ -103,37 +103,31 @@ const btnLikes = document.querySelectorAll(".like-button");
 console.log(btnLikes);
 
 const likeCounterOutput = document.querySelectorAll("#like-counter-1");
-
-/* for (let i = 0; i < btnLikes.length; i++) {
-    btnLikes[i].addEventListener("click", function() {
-        likeCounterOutput.innerHTML = `${posts[i].likes++}`;
-    });
-};   */
-
-//# alternativa..
 /* btnLikes.forEach((btn,index) => {
-
-    let counter = 0;
-    btn.addEventListener("click", function(){
-        counter = posts[index].likes++;
-        likeCounterOutput[index].innerHTML = `${counter}`;
-        //console.log(counter);
-
-        btn.addEventListener("dblclick", function(){
-            counter += counter - 1;
-            likeCounterOutput[index].innerHTML = `${counter}`;
-        });
-    });
-});  */
-
-btnLikes.forEach((btn,index) => {
-
+    
     btn.addEventListener("click", function(){
         likeCounterOutput[index].innerHTML = `${posts[index].likes++}`;
     });
+    
+}); */
 
-    btn.addEventListener("dblclick", function(){
-        likeCounterOutput[index].innerHTML = `${posts[index].likes--}`;
-    });
 
-});
+btnLikes.forEach((btn,index) => {
+    let clickCount = 0;
+    btn.addEventListener('click', function() {
+        clickCount++;
+        if (clickCount === 1) {
+            singleClickTimer = setTimeout(function() {
+                clickCount = 0;
+                likeCounterOutput[index].innerHTML = `${posts[index].likes++}`;
+            }, 400);
+        } else if (clickCount === 2) {
+            clearTimeout(singleClickTimer);
+            clickCount = 0;
+            likeCounterOutput[index].innerHTML = `${posts[index].likes--}`;
+        }
+    })
+    
+},false);
+
+
