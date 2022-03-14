@@ -102,26 +102,26 @@ const btnLikes = document.querySelectorAll(".like-button");
 console.log(btnLikes);
 
 
-btnLikes.forEach((btn) => {
-
-    let string = "";
-    btn.addEventListener("click", function(){
-        string="ciao";
-        return console.log(string);
-    });
-
-    
-}); 
-
-/* for (let i = 0; i < btnLikes.length; i++) {
+for (let i = 0; i < btnLikes.length; i++) {
     btnLikes[i].addEventListener("click", function() {
-        console.log("Button Clicked");
+        //posts[i].likes++;
+        console.log(posts[i].likes++)
     });
-} */
+}
+
+
 
 
 //ogni button not clicked == false ; add this property to each object oh the array posts
-for (let i = 0; i<posts.length;i++){
+/* for (let i = 0; i<posts.length;i++){
     posts[i].clicked = false;
 }
+ */
 
+
+/* btnLikes.forEach((btn) => {
+
+    btn.addEventListener("click", function(){
+        return posts.likes++;
+    });
+});  */
