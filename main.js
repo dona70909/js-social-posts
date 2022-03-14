@@ -111,7 +111,7 @@ const likeCounterOutput = document.querySelectorAll("#like-counter-1");
 };   */
 
 //# alternativa..
-btnLikes.forEach((btn,index) => {
+/* btnLikes.forEach((btn,index) => {
 
     let counter = 0;
     btn.addEventListener("click", function(){
@@ -119,11 +119,10 @@ btnLikes.forEach((btn,index) => {
         likeCounterOutput[index].innerHTML = `${counter}`;
         console.log(counter);
     });
-}); 
+}); */ 
 
-//ogni button not clicked == false ; add this property to each object oh the array posts
-/* for (let i = 0; i<posts.length;i++){
-    posts[i].clicked = false;
-}
- */
-
+btnLikes.forEach((btn,index) => {
+    btn.addEventListener("click", function(){
+        likeCounterOutput[index].innerHTML = `${posts[index].likes++}`;
+    });
+});
