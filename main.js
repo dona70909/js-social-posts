@@ -59,7 +59,7 @@ const posts = [
 // container of each post
 const containerPosts = document.getElementById("container");
 
-//stampare tutti gli oggetti dell'array
+// # stampare tutti gli oggetti dell'array
 for(let i = 0; i<posts.length;i++){
     
     containerPosts.innerHTML +=` 
@@ -100,6 +100,7 @@ for(let i = 0; i<posts.length;i++){
 `;
 };
 
+//# data
 const createdData = document.querySelectorAll(".post-meta__data");
 for(let i=0; i<posts.length;i++){
     let newData = reverseData(posts[i].created);
