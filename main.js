@@ -98,16 +98,26 @@ for(let i = 0; i<posts.length;i++){
 }
 
 //lista dei buttons
-const btnLikes = document.querySelectorAll(".like-button__icon");
+const btnLikes = document.querySelectorAll(".like-button");
 console.log(btnLikes);
-let string = "";
-btnLikes.forEach(btn => {
 
+
+btnLikes.forEach((btn) => {
+
+    let string = "";
     btn.addEventListener("click", function(){
-        
+        string="ciao";
+        return console.log(string);
     });
 
+    
 }); 
+
+/* for (let i = 0; i < btnLikes.length; i++) {
+    btnLikes[i].addEventListener("click", function() {
+        console.log("Button Clicked");
+    });
+} */
 
 
 //ogni button not clicked == false ; add this property to each object oh the array posts
