@@ -111,16 +111,35 @@ btnLikes.forEach((btn,index) => {
         if (clickCount === 1) {
             singleClickTimer = setTimeout(function() {
                 clickCount = 0;
-                likeCounterOutput[index].innerHTML = `${posts[index].likes++}`;
-                likedPosts.push(posts[index]);
+                likeCounterOutput[index].innerHTML = `${posts[index].likes + 1}`;
+                btn.classList.add("like-button--liked");
+                likedPosts.push(posts[index].id)
+                return console.log(likedPosts);
             }, 400);
         } else if (clickCount === 2) {
             clearTimeout(singleClickTimer);
             clickCount = 0;
-            likeCounterOutput[index].innerHTML = `${posts[index].likes--}`;
+            likeCounterOutput[index].innerHTML = `${posts[index].likes}`;
+            btn.classList.remove("like-button--liked");
+            likedPosts.pop(posts[index].id)
+            return console.log(likedPosts);
         }
     })
     
-},false);
+},false); 
+
+
+
+/* btnLikes.forEach((btn,index) => {
+    btn.addEventListener('click', function() {
+        likeCounterOutput[index].innerHTML = `${posts[index].likes + 1}`;
+        this.classList.add("like-button--liked");
+        likedPosts.push(posts[index].id)
+        return console.log(likedPosts);
+    },false)
+});
+
+*/
+
 
 
