@@ -96,3 +96,22 @@ for(let i = 0; i<posts.length;i++){
     </div>
     `;
 }
+
+//lista dei buttons
+const btnLikes = document.querySelectorAll(".like-button__icon");
+console.log(btnLikes);
+let string = "";
+btnLikes.forEach(btn => {
+
+    btn.addEventListener("click", function(){
+        
+    });
+
+}); 
+
+
+//ogni button not clicked == false ; add this property to each object oh the array posts
+for (let i = 0; i<posts.length;i++){
+    posts[i].clicked = false;
+}
+
