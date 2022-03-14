@@ -117,12 +117,23 @@ const likeCounterOutput = document.querySelectorAll("#like-counter-1");
     btn.addEventListener("click", function(){
         counter = posts[index].likes++;
         likeCounterOutput[index].innerHTML = `${counter}`;
-        console.log(counter);
+        //console.log(counter);
+
+        btn.addEventListener("dblclick", function(){
+            counter += counter - 1;
+            likeCounterOutput[index].innerHTML = `${counter}`;
+        });
     });
-}); */ 
+});  */
 
 btnLikes.forEach((btn,index) => {
+
     btn.addEventListener("click", function(){
         likeCounterOutput[index].innerHTML = `${posts[index].likes++}`;
     });
+
+    btn.addEventListener("dblclick", function(){
+        likeCounterOutput[index].innerHTML = `${posts[index].likes--}`;
+    });
+
 });
