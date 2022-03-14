@@ -61,73 +61,126 @@ const containerPosts = document.getElementById("container");
 
 //stampare tutti gli oggetti dell'array
 for(let i = 0; i<posts.length;i++){
+    
     containerPosts.innerHTML +=` 
     
     <div class="post">
-    <div class="post__header">
-    <div class="post-meta">                    
-    <div class="post-meta__icon">
-    <img class="profile-pic" src=${posts[i].media} alt="${posts[i].author.name}">                    
+        <div class="post__header">
+            <div class="post-meta">                    
+                <div class="post-meta__icon">
+                    
+                </div>
+                <div class="post-meta__data">
+                    <div class="post-meta__author">${posts[i].author.name}</div>
+                    
+                </div>                    
+            </div>
+        </div>
+        
+        <div class="post__text">${posts[i].content}</div>
+        
+        <div class="post__image">
+            <img src=${posts[i].media} alt="post media">
+        </div> 
+        
+        <div class="post__footer">
+            <div class="likes js-likes">
+                <div class="likes__cta">
+                    <a class="like-button  js-like-button" href="#/" data-postid="1">
+                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                        <span class="like-button__label">Mi Piace</span>
+                    </a>
+                </div>
+                <div class="likes__counter">
+                    Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone.
+                </div>
+            </div> 
+        </div>            
     </div>
-    <div class="post-meta__data">
-    <div class="post-meta__author">${posts[i].author.name}</div>
-    <div class="post-meta__time">${posts[i].created}</div>
-    </div>                    
-    </div>
-    </div>
-    <div class="post__text">${posts[i].content}</div>
-    <div class="post__image">
-    <img src=${posts[i].author.image} alt="">
-    </div>
-    
-    <div class="post__footer">
-    <div class="likes js-likes">
-    <div class="likes__cta">
-    <a class="like-button  js-like-button" href="#/" data-postid="1">
-    <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-    <span class="like-button__label">Mi Piace</span>
-    </a>
-    </div>
-    <div class="likes__counter">
-    Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
-    </div>
-    </div> 
-    </div>            
-    </div>
-    `;
+`;
 };
 
+const createdData = document.querySelectorAll(".post-meta__data");
+for(let i=0; i<posts.length;i++){
+    let newData = reverseData(posts[i].created);
+    createdData[i].innerHTML += `
+    <div class="post-meta__time">${newData}</div>
+    
+    `; 
+}
 
-//lista dei buttons
+
+// # profile pic
+const profilePic = document.querySelectorAll(".post-meta__icon");
+console.log(posts[0].author.name.charAt(0));
+for(let i=0; i<posts.length;i++){
+    if(posts[i].author.image == null){
+        let nameUser = onlyCapitalLetters(posts[i].author.name);
+        profilePic[i].innerHTML = `
+        <p class="profile-pic"> ${nameUser}</p> 
+        `;
+    } else {
+        profilePic[i].innerHTML = `<img class="profile-pic" src=${posts[i].author.image} alt="${posts[i].author.name}">
+        `;
+    }
+}
+
+// # lke buttons
 const btnLikes = document.querySelectorAll(".like-button");
 console.log(btnLikes);
 const likedPosts = [];
+console.log(likedPosts);
 const likeCounterOutput = document.querySelectorAll("#like-counter-1");
 
 btnLikes.forEach((btn,index) => {
     let clickCount = 0;
     btn.addEventListener('click', function() {
         clickCount++;
+        
         if (clickCount === 1) {
             singleClickTimer = setTimeout(function() {
                 clickCount = 0;
                 likeCounterOutput[index].innerHTML = `${posts[index].likes + 1}`;
                 btn.classList.add("like-button--liked");
-                likedPosts.push(posts[index].id)
-                return console.log(likedPosts);
+                likedPosts.push(posts[index].id);
+                return console.log(likedPosts, posts[index].id + " id aggiunto ");
             }, 400);
+            return console.log(likedPosts + " finale push");
         } else if (clickCount === 2) {
             clearTimeout(singleClickTimer);
             clickCount = 0;
             likeCounterOutput[index].innerHTML = `${posts[index].likes}`;
             btn.classList.remove("like-button--liked");
-            likedPosts.pop(posts[index].id)
-            return console.log(likedPosts);
-        }
-    })
+            likedPosts.splice(likedPosts[index + 1]);
+            return console.log(likedPosts,posts[index].id + " id rimosso");
+        };
+    },false);
     
-},false); 
+}); 
 
+// % function
+function onlyCapitalLetters (str) { 
+    let newStr = "";
+    
+    for (let i = 0; i < str.length; i++) {
+        if (str[i].match(/[A-Z]/)) {
+            newStr += str[i] + " ";
+        }
+    }
+    return newStr;
+};
+
+//# creates a new array, reverse it and generate a new string data
+function reverseData(data){
+    const arrayData = [];
+    arrayData.push(data.substring(0,4));
+    arrayData.push(data.substring(5,7));
+    arrayData.push(data.substring(8,10));
+    arrayData.reverse();
+    let newString = arrayData[0] + "-" + arrayData[1] + "-" + arrayData[2];
+
+    return newString;
+}
 
 
 /* btnLikes.forEach((btn,index) => {
