@@ -102,15 +102,24 @@ for(let i = 0; i<posts.length;i++){
 const btnLikes = document.querySelectorAll(".like-button");
 console.log(btnLikes);
 
-const likeCounterOutput = document.querySelector("#like-counter-1");
+const likeCounterOutput = document.querySelectorAll("#like-counter-1");
 
-for (let i = 0; i < btnLikes.length; i++) {
+/* for (let i = 0; i < btnLikes.length; i++) {
     btnLikes[i].addEventListener("click", function() {
         likeCounterOutput.innerHTML = `${posts[i].likes++}`;
     });
-}; 
+};   */
 
+//# alternativa..
+btnLikes.forEach((btn,index) => {
 
+    let counter = 0;
+    btn.addEventListener("click", function(){
+        counter = posts[index].likes++;
+        likeCounterOutput[index].innerHTML = `${counter}`;
+        console.log(counter);
+    });
+}); 
 
 //ogni button not clicked == false ; add this property to each object oh the array posts
 /* for (let i = 0; i<posts.length;i++){
@@ -118,10 +127,3 @@ for (let i = 0; i < btnLikes.length; i++) {
 }
  */
 
-
-/* btnLikes.forEach((btn) => {
-
-    btn.addEventListener("click", function(){
-        return posts.likes++;
-    });
-});  */
