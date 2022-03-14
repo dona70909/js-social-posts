@@ -101,7 +101,7 @@ for(let i = 0; i<posts.length;i++){
 //lista dei buttons
 const btnLikes = document.querySelectorAll(".like-button");
 console.log(btnLikes);
-
+const likedPosts = [];
 const likeCounterOutput = document.querySelectorAll("#like-counter-1");
 
 btnLikes.forEach((btn,index) => {
@@ -112,6 +112,7 @@ btnLikes.forEach((btn,index) => {
             singleClickTimer = setTimeout(function() {
                 clickCount = 0;
                 likeCounterOutput[index].innerHTML = `${posts[index].likes++}`;
+                likedPosts.push(posts[index]);
             }, 400);
         } else if (clickCount === 2) {
             clearTimeout(singleClickTimer);
