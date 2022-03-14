@@ -95,20 +95,20 @@ for(let i = 0; i<posts.length;i++){
         </div>            
     </div>
     `;
-}
+};
+
 
 //lista dei buttons
 const btnLikes = document.querySelectorAll(".like-button");
 console.log(btnLikes);
 
+const likeCounterOutput = document.querySelector("#like-counter-1");
 
 for (let i = 0; i < btnLikes.length; i++) {
     btnLikes[i].addEventListener("click", function() {
-        //posts[i].likes++;
-        console.log(posts[i].likes++)
+        likeCounterOutput.innerHTML = `${posts[i].likes++}`;
     });
-}
-
+}; 
 
 
 
