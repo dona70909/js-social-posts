@@ -146,13 +146,12 @@ btnLikes.forEach((btn,index) => {
                 likedPosts.push(posts[index].id);
                 return console.log(likedPosts, posts[index].id + " id aggiunto ");
             }, 400);
-            return console.log(likedPosts + " finale push");
         } else if (clickCount === 2) {
             clearTimeout(singleClickTimer);
             clickCount = 0;
             likeCounterOutput[index].innerHTML = `${posts[index].likes}`;
             btn.classList.remove("like-button--liked");
-            likedPosts.splice(likedPosts[index + 1]);
+            likedPosts.splice(posts[index].id[index]);
             return console.log(likedPosts,posts[index].id + " id rimosso");
         };
     },false);
